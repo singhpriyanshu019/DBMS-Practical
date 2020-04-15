@@ -1,0 +1,86 @@
+Name   : Priyanshu Singh
+Course :Bsc.(H) Stats
+Roll No. : 20191224
+
+
+#4) 
+mysql> create database employee_details;
+    mysql> use employee_details;
+  
+   mysql> create table employee(
+    -> Person_name char(30) primary key,
+    -> Street char(30) not null,
+    -> city char(15) not null);
+
+   mysql> create table Company(
+    -> Company_name varchar(30) Primary key,
+    -> City char(15));
+
+   mysql> create table Works(
+    -> Person_name  char(30),
+    -> Company_name varchar(30),
+    -> Salary decimal(10,2),
+    -> foreign key(Person_name) references employee(Person_name),
+    -> foreign key(Company_name) references Company(Company_name));
+
+   mysql> Create table manages(
+    -> Person_name char(30),
+    -> Manager_name char(30),
+    -> foreign key(Person_name) references employee(Person_name));
+
+mysql> insert into employee values("Reena","23/3 D block","Delhi");
+mysql> insert into employee values("Meena","454/42 V block","Gurgaon");
+mysql> insert into employee values("Sara","65/69 A block","Gurgaon");
+mysql> insert into employee values("Kartik","87/27 D block","Lucknow");
+mysql> insert into employee values("Karan","74/28 F block","Gaziabad");
+mysql> insert into employee values("Yudhishtir","54/21 G block","Noida");
+mysql> insert into employee values("Bheem","347-5 A block","Noida");
+mysql> insert into employee values("Arjun","65/8 V block","Gurgaon");
+mysql> insert into employee values("Nakul","62/7 d block","Sitapur");
+mysql> insert into employee values("Sahdev","91/8 C block","Gaziabad");
+
+mysql> insert into company values("YES Bank","Delhi");
+mysql> insert into company values("ICICI Bank","Gurgaon");
+mysql> insert into company values("Axis Bank","Noida");
+mysql> insert into company values("SBI bank","Lucknow");
+mysql> insert into company values("Union Bank","Gaziabad");
+
+mysql> insert into works values("Reena","YES Bank", 20000);
+mysql> insert into works values("Meena","ICICI Bank",15000);
+mysql> insert into works values("Sara","YES Bank",5000);
+mysql> insert into works values("Kartik","SBI Bank",8000);
+mysql> insert into works values("Karan","Axis Bank",10000);
+mysql> insert into works values("Yudhishtir","ICICI Bank",20000);
+mysql> insert into works values("Bheem","Union Bank",15000);
+mysql> insert into works values("Arjun","Axis Bank",20000);
+mysql> insert into works values("Nakul","SBI Bank",12000);
+mysql> insert into works values("Sahdev","Union Bank",18000);
+
+mysql> insert into manages values("Reena","Arun Kumar");
+mysql> insert into manages values("Meena","Arjun Kumar");
+mysql> insert into manages values("Nakul","Vijay Rupani");
+mysql> insert into manages values("Sahdev","Raghavendra Bhora");
+mysql> insert into manages values("Arjun","Shikhar Chandila");
+
+Q (a) Primary Key- Person_name in table employee
+                            Company_name in table company
+        Foreign Key- Person_name in table works
+                            Company_name in table works
+                            Person_name in table manages
+
+Q (b) mysql> alter table employee add column email varchar(20);
+
+Q (c) mysql> select distinct(manager_name) from manages as m, works as w where m.person_name=w.person_name and (w.company_name="YES bank" or w.Company_name="ICICI Bank");
+
+Q (d) mysql> select e.Person_name, e.Street, e.City, w.salary from employee as e, works as w where e.person_name=w.person_name and w.company_name="YES Bank" and w.salary>10000;
+
+Q (e) mysql> select e.person_name from employee as e, works as w, company as c where e.person_name=w.person_name and e.city=c.city and w.company_name=c.company_name;
+
+Q (f) mysql> select company_name, max(salary), min(salary), avg(salary) from works group by company_name;
+
+Q (g) mysql> select company_name, sum(salary), count(company_name) as "number of employees" from works group by company_name;
+
+Q (h) mysql> select company_name,max(salary) from works;
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
